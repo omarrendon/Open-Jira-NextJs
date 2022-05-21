@@ -1,18 +1,17 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import '../styles/globals.css';
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { ligthTheme, darkTheme } from '../themes';
+import { UIProvider } from '../context/ui';
 
-const basicTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={basicTheme}>
-      <CssBaseline/>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <UIProvider >
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </UIProvider>
   )
 }
 
