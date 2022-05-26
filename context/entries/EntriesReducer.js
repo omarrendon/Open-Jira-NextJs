@@ -1,4 +1,4 @@
-import { initialState } from "./UIProvider";
+import { initialState } from "./EntriesProvider";
 
 export const openSideBar = () => ({
   type: 'UIOpenSidebar'
@@ -8,7 +8,7 @@ export const closeSideBar = () => ({
   type: 'UICloseSidebar'
 });
 
-export const UIReducer = (state = initialState, action) => {
+export const EntriesReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case 'UIOpenSidebar':

@@ -13,7 +13,6 @@ export const UIProvider = ({children}) => {
   const openSideBarUI = () => dispatch(openSideBar());
   const closeSideBarUI = () => dispatch(closeSideBar());
 
-  console.log('STATE OPNE  ----', state);
 
   return (
     <UIContext.Provider
