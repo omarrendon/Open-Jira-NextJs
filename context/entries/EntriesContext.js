@@ -1,5 +1,3 @@
 import { createContext } from "react";
 
-export const EntriesContext =  createContext({
-  entries: [],
-});
+export const EntriesContext =  createContext({});

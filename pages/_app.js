@@ -1,17 +1,21 @@
 import '../styles/globals.css';
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { ligthTheme, darkTheme } from '../themes';
-import { UIProvider } from '../context/ui';
 
+import { UIProvider } from '../context/ui';
+import { EntriesProvider } from '../context/entries';
+
+import { ligthTheme, darkTheme } from '../themes';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <UIProvider >
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </UIProvider>
+    <EntriesProvider>
+      <UIProvider >
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </UIProvider>
+    </EntriesProvider>
   )
 }
 
