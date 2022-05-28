@@ -1,20 +1,19 @@
 import { initialState } from "./EntriesProvider";
 
-export const openSideBar = () => ({
-  type: 'UIOpenSidebar'
+export const addEntry = (data) => ({
+  type: '[Entry] Add-Entry',
+  payload: data
 });
 
-export const closeSideBar = () => ({
-  type: 'UICloseSidebar'
-});
+
 
 export const EntriesReducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case 'UIOpenSidebar':
+    case '[Entry] Add-Entry':
       return {
         ...state,
-        sideMenuOpen: true,
+        entries: [...state.entries, action.payload],
       };
     case 'UICloseSidebar':
       return {

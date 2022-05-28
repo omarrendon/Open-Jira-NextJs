@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { EntriesContext, EntriesReducer } from "./index";
 import { v4 as uuidv4 } from 'uuid';
+import { addEntry } from "./EntriesReducer";
 
 
 export const initialState = {
@@ -36,10 +37,24 @@ export const initialState = {
 export const EntriesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(EntriesReducer, initialState);
 
+  const addNewEntry = ( description ) => {
+    const entry = {
+      _id: uuidv4(),
+      description,
+      createdAt: Date.now(),
+      status: 'pending',
+    }
+
+    dispatch(addEntry(entry));
+  };
+
   return (
     <EntriesContext.Provider
       value={{
-        ...state
+        ...state,
+
+        // Methods
+        addNewEntry
       }}
     >
       {children}
