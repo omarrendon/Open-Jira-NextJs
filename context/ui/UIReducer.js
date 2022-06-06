@@ -8,6 +8,14 @@ export const closeSideBar = () => ({
   type: 'UICloseSidebar'
 });
 
+export const startDragging = () => ({
+  type: 'UIStartDragging'
+});
+
+export const endDragging = () => ({
+  type: 'UEndDragging'
+});
+
 export const UIReducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -21,6 +29,16 @@ export const UIReducer = (state = initialState, action) => {
         ...state,
         sideMenuOpen: false,
       };
+      case 'UIStartDragging':
+        return {
+          ...state,
+          isDragging: true,
+        };
+    case 'UEndDragging':
+      return {
+        ...state,
+        isDragging: false,
+      }
     default:
       return state;
   }

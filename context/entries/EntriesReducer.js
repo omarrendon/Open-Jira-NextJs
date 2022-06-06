@@ -15,11 +15,6 @@ export const EntriesReducer = (state = initialState, action) => {
         ...state,
         entries: [...state.entries, action.payload],
       };
-    case 'UICloseSidebar':
-      return {
-        ...state,
-        sideMenuOpen: false,
-      };
     default:
       return state;
   }
