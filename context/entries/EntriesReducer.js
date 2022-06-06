@@ -5,6 +5,11 @@ export const addEntry = (data) => ({
   payload: data
 });
 
+export const updateEntryReducer = (data) => ({
+  type: '[Entry] Update-Entry',
+  payload: data
+});
+
 
 
 export const EntriesReducer = (state = initialState, action) => {
@@ -14,6 +19,17 @@ export const EntriesReducer = (state = initialState, action) => {
       return {
         ...state,
         entries: [...state.entries, action.payload],
+      };
+    case '[Entry] Update-Entry':
+      return {
+        ...state,
+        entries: state.entries.map((entry) => {
+          if (entry._id === action.payload._id) {
+            entry.status = action.payload.status;
+            entry.description = action.payload.description;
+          }
+          return entry;
+        })
       };
     default:
       return state;

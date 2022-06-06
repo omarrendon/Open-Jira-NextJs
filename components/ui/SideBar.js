@@ -9,8 +9,6 @@ const menuItems = ['Inbox', 'Starred', 'Send Email', 'Drafts'];
 export const SideBar = () => {
   const { sideMenuOpen, openSideBarUI, closeSideBarUI } = useContext(UIContext);
 
-  // console.log('sssssss', state2);
-
   return (
     <Drawer
       anchor='left'

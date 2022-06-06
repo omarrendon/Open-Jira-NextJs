@@ -18,7 +18,7 @@ export const EntryCard = ({ entry }) => {
   };
 
   const onDragEnd = ( event ) => {
-    endDraggingUI();
+    endDraggingUI()
   };
 
   return (

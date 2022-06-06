@@ -10,13 +10,19 @@ import { List, Paper } from '@mui/material';
 import styles from './EntryList.module.css';
 
 export const EntryList = ({ status }) => {
-  const { entries } = useContext(EntriesContext);
-  const { isDragging } = useContext(UIContext);
+  const { entries, updateEntry } = useContext(EntriesContext);
+  const { isDragging, endDraggingUI } = useContext(UIContext);
 
   const entriesByStatus = useMemo(() => entries.filter(entries => entries.status === status), [entries]);
 
   const onDropEntry = (event) => {
     const id = event.dataTransfer.getData('text');
+
+    const entryUpdate = entries.filter((entry) => entry._id === id);
+    entryUpdate[0].status = status;
+
+    updateEntry(entryUpdate[0]);
+    endDraggingUI();
   };
 
   const allowDrop = (event) => {
