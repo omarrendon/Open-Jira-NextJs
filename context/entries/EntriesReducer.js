@@ -10,6 +10,11 @@ export const updateEntryReducer = (data) => ({
   payload: data
 });
 
+export const getEntriesReducer = (data) => ({
+  type: '[Entry] Get-Entry',
+  payload: data,
+});
+
 
 
 export const EntriesReducer = (state = initialState, action) => {
@@ -19,6 +24,11 @@ export const EntriesReducer = (state = initialState, action) => {
       return {
         ...state,
         entries: [...state.entries, action.payload],
+      };
+    case '[Entry] Get-Entry':
+      return {
+        ...state,
+        entries: action.payload,
       };
     case '[Entry] Update-Entry':
       return {

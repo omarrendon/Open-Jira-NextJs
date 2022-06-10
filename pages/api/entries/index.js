@@ -13,7 +13,7 @@ export default function handler (req, res) {
 
 const getEntries = async (res, req) => {
   await db.connect();
-  const entries = Entry.find().sort({ createdAt: 'ascending'});
+  const entries = await Entry.find().sort({ createdAt: 'ascending'});
 
   await db.disconnect();
   res.status(200).json({
