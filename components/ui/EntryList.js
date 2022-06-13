@@ -13,7 +13,7 @@ export const EntryList = ({ status }) => {
   const { entries, updateEntry } = useContext(EntriesContext);
   const { isDragging, endDraggingUI } = useContext(UIContext);
 
-  const entriesByStatus = useMemo(() => entries.filter(entries => entries.status === status), [entries]);
+  const entriesByStatus = useMemo(() => entries.filter(entries => entries?.status === status), [entries]);
 
   const onDropEntry = (event) => {
     const id = event.dataTransfer.getData('text');

@@ -14,15 +14,12 @@ export const initialState = {
 export const EntriesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(EntriesReducer, initialState);
 
-  const addNewEntry = ( description ) => {
-    const entry = {
-      _id: uuidv4(),
-      description,
-      createdAt: Date.now(),
-      status: 'pending',
-    }
-
-    dispatch(addEntry(entry));
+  const addNewEntry = async (description) => {
+    const { data } = await entriesApi.post('/entries', {
+      description
+    });
+    const { entryCreated } = data;
+    dispatch(addEntry(entryCreated));
   };
 
   const updateEntry = (entry) => {
@@ -30,7 +27,7 @@ export const EntriesProvider = ({ children }) => {
   };
 
   const refresEntries = async () => {
-    const { data: { entries} }  = await entriesApi.get('/entries');
+    const { data: { entries } } = await entriesApi.get('/entries');
 
     dispatch(getEntriesReducer(entries));
   };
@@ -38,7 +35,7 @@ export const EntriesProvider = ({ children }) => {
   useEffect(() => {
     refresEntries();
   }, []);
-  
+
 
   return (
     <EntriesContext.Provider

@@ -37,8 +37,7 @@ const postEntry = async (res, req) => {
     await db.disconnect();
     
     return res.status(201).json({
-      entryCreated,
-      message: 'Success created!'
+      entryCreated
     });
   } catch (error) {
     console.log('ERROR IN CREATE NEW ENTRY ==', error);
