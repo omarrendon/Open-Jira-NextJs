@@ -1,16 +1,7 @@
-import mongoose from "mongoose";
-import { db } from "../../../database";
-import { Entry } from "../../../models";
+import { db } from "../../../../database";
+import { Entry } from "../../../../models";
 
 export default function (req, res) {
-  const { id } = req.query;
-
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({
-      message: 'ID is not valid ' + id,
-    });
-  }
-
   switch (req.method) {
     case 'PUT':
       return updateEntry(req, res);
