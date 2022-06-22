@@ -16,7 +16,6 @@ export const getEntriesReducer = (data) => ({
 });
 
 
-
 export const EntriesReducer = (state = initialState, action) => {
 
   switch (action.type) {

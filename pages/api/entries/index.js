@@ -1,7 +1,7 @@
 import { db } from "../../../database";
 import { Entry } from "../../../models";
 
-export default function handler (req, res) {
+export default function handler(req, res) {
 
   switch (req.method) {
     case 'GET':
@@ -15,7 +15,7 @@ export default function handler (req, res) {
 
 const getEntries = async (res, req) => {
   await db.connect();
-  const entries = await Entry.find().sort({ createdAt: 'ascending'});
+  const entries = await Entry.find().sort({ createdAt: 'ascending' });
 
   await db.disconnect();
   res.status(200).json({
@@ -24,7 +24,7 @@ const getEntries = async (res, req) => {
 };
 
 const postEntry = async (res, req) => {
-  const { description }  = req.body;
+  const { description } = req.body;
 
   const entryCreated = new Entry({
     description,
@@ -35,7 +35,7 @@ const postEntry = async (res, req) => {
     await db.connect();
     await entryCreated.save();
     await db.disconnect();
-    
+
     return res.status(201).json({
       entryCreated
     });
