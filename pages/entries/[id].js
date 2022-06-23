@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const validStatus = ['pending', 'in-progress', 'finished'];
 
@@ -25,6 +25,9 @@ export const EntryPage = () => {
   const [inputvalue, setInputvalue] = useState('');
   const [status, setStatus] = useState('pending');
   const [touched, setTouched] = useState(false);
+
+
+  const isnotValid = useMemo(() => inputvalue.length <= 0 && touched, [inputvalue, touched])
 
   const onTextFieldChange = (event) => {
     setInputvalue(event.target.value);
@@ -34,6 +37,9 @@ export const EntryPage = () => {
     setStatus(event.target.value);
   };
 
+  const onSave = () => {
+
+  };
 
   return (
     <Layout title='Detail entry'>
@@ -58,6 +64,9 @@ export const EntryPage = () => {
                 label='Nueva entrada'
                 onChange={onTextFieldChange}
                 value={inputvalue}
+                helperText={isnotValid && 'Ingrese un valor valido'}
+                error={isnotValid}
+                onBlur={() => setTouched(true)}
               />
               <FormControl>
                 <FormLabel>Estado:</FormLabel>
@@ -82,6 +91,8 @@ export const EntryPage = () => {
                 startIcon={<SaveAsOutlinedIcon />}
                 fullWidth
                 variant='contained'
+                onClick={onSave}
+                disabled={inputvalue.length <= 0}
               >
                 Guardar
               </Button>
