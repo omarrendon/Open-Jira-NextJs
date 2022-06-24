@@ -1,4 +1,6 @@
+import { useContext, useMemo, useState } from 'react';
 import { Layout } from '../../components/layouts';
+import { dbEntries } from '../../database';
 import {
   capitalize,
   Button,
@@ -17,15 +19,15 @@ import {
 } from '@mui/material';
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useMemo, useState } from 'react';
+import { EntriesContext } from '../../context/entries';
 
 const validStatus = ['pending', 'in-progress', 'finished'];
 
-export const EntryPage = () => {
-  const [inputvalue, setInputvalue] = useState('');
-  const [status, setStatus] = useState('pending');
+export const EntryPage = ({ entry }) => {
+  const { updateEntry } = useContext(EntriesContext);
+  const [inputvalue, setInputvalue] = useState(entry.description);
+  const [status, setStatus] = useState(entry.status);
   const [touched, setTouched] = useState(false);
-
 
   const isnotValid = useMemo(() => inputvalue.length <= 0 && touched, [inputvalue, touched])
 
@@ -38,11 +40,19 @@ export const EntryPage = () => {
   };
 
   const onSave = () => {
+    if( inputvalue.trim().length === 0 ) return;
 
+    const entryToUpdate = {
+      ...entry,
+      status,
+      description: inputvalue
+    };
+
+    updateEntry(entryToUpdate, true);
   };
 
   return (
-    <Layout title='Detail entry'>
+    <Layout title={ inputvalue.substring(0,20) + '.....'}>
       <Grid
         container
         justifyContent='center'
@@ -114,4 +124,28 @@ export const EntryPage = () => {
   )
 }
 
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+export const getServerSideProps = async (ctx) => {
+  const { id } = ctx.params;
+
+  const entry = await dbEntries.getEntryById(id);
+
+  if (!entry) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  // const { data } = await  // your fetch function here 
+  return {
+    props: {
+      entry
+    }
+  }
+}
 export default EntryPage;

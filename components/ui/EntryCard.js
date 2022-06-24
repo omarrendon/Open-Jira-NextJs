@@ -4,13 +4,15 @@ import {
   CardContent,
   Typography,
 } from '@mui/material'
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UIContext } from '../../context/ui/UIContex';
 
 export const EntryCard = ({ entry }) => {
-
   const { startDraggingUI, endDraggingUI } = useContext(UIContext);
+  const router = useRouter();
 
+  const onRedirectToDetailEntry = () => router.push(`/entries/${entry._id}`);
 
   const onDragStart = (event) => {
     event.dataTransfer.setData("text", entry._id);
@@ -23,7 +25,11 @@ export const EntryCard = ({ entry }) => {
 
   return (
     <Card
-      sx={{ marginBottom: 1 }}
+      onClick={onRedirectToDetailEntry}
+      sx={{
+        marginBottom: 1,
+        cursor: 'pointer'
+      }}
       draggable
       onDragStart={ onDragStart }
       onDragEnd={ onDragEnd }
