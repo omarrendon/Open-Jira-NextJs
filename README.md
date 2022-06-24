@@ -3,7 +3,8 @@
 ## Project description
 
 ![](./images/img1.png)
-
+![](./images/img2.png)
+![](./images/img3.png)
 
 ```
 This is a clone of jira task manager app, in wich I use Next js to build this project, the purpose of this project is
