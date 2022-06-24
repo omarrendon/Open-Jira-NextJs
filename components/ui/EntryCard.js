@@ -7,6 +7,7 @@ import {
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UIContext } from '../../context/ui/UIContex';
+import { getFormatDistanceNow } from '../../utils';
 
 export const EntryCard = ({ entry }) => {
   const { startDraggingUI, endDraggingUI } = useContext(UIContext);
@@ -38,7 +39,7 @@ export const EntryCard = ({ entry }) => {
         <Typography xs={{ whiteSpace: 'pre-line' }}> {entry.description} </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'end', paddingRight: 2 }}>
-        <Typography variant='body2'> Ago 30 minutes</Typography>
+        <Typography variant='body2'>{`Hace ${getFormatDistanceNow(entry.createdAt)}`}</Typography>
       </CardActions>
     </Card>
   )

@@ -20,6 +20,7 @@ import {
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { EntriesContext } from '../../context/entries';
+import { getFormatDistanceNow } from '../../utils';
 
 const validStatus = ['pending', 'in-progress', 'finished'];
 
@@ -62,7 +63,7 @@ export const EntryPage = ({ entry }) => {
           <Card>
             <CardHeader
               title={`Entrada: ${inputvalue}`}
-              subheader='Creada ....'
+              subheader={`Creada hace ${getFormatDistanceNow(entry.createdAt)}`}
             />
             <CardContent>
               <TextField
@@ -141,7 +142,6 @@ export const getServerSideProps = async (ctx) => {
     }
   }
 
-  // const { data } = await  // your fetch function here 
   return {
     props: {
       entry
