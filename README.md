@@ -2,6 +2,9 @@
 
 ## Project description
 
+![](./images/img1.png)
+
+
 ```
 This is a clone of jira task manager app, in wich I use Next js to build this project, the purpose of this project is
 practice and study the concepts of SSR (server side rendering) that Next offer us.
