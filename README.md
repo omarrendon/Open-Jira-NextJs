@@ -39,3 +39,9 @@ call the endpoint:
 ```
   localhost:3000/api/seed
 ```
+
+## TEST
+The project is tested with jest and react-testing-library. To run the tests, just need to execute the next comand.
+```
+yarn jest
+```
