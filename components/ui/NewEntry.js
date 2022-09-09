@@ -28,7 +28,6 @@ export const NewEntry = () => {
       }}
     >
       {!isAdding ? (
-
         <Button
           startIcon={<AddCircleOutlineIcon />}
           variant='outlined'
@@ -40,6 +39,7 @@ export const NewEntry = () => {
       ) : (
         <>
           <TextField
+            data-testid="new-entry-input" 
             fullWidth
             sx={{
               marginTop: 2,
