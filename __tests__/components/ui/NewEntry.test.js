@@ -8,6 +8,7 @@ describe('<NewEntry /> Component', () => {
   let cancelButton;
   let saveButton;
   let textField;
+
   // Before each test we mount NewEntry Component and get it's elements.
   beforeEach(() => {
     render(<NewEntry />);
@@ -20,7 +21,7 @@ describe('<NewEntry /> Component', () => {
 
   test('Should be show the input when press the button "Agregar tarea"', () => {
     fireEvent.click(buttonAddEntry);
-    const textField = screen.getByTestId('new-entry-input');
+    textField = screen.getByTestId('new-entry-input');
     expect(textField).toBeInTheDocument();
   });
 
@@ -34,12 +35,25 @@ describe('<NewEntry /> Component', () => {
     expect(saveButton).toBeInTheDocument();
   });
 
-  test('should be contain the payload and reset the states after save a new entry', () => {
+  test('TextField it should be empty', () => {
+    fireEvent.click(buttonAddEntry);
     textField = screen.getByLabelText('Nueva entrada');
+
+    expect(textField.value).toBe('');
+  });
+  
+  test('The textfield should be disabled at the init component ', () => {
+    fireEvent.click(buttonAddEntry);
+    saveButton = screen.getByRole('button', { name: 'Guardar' });
+    textField = screen.getByLabelText('Nueva entrada');
+    console.log(textField.disabled);
+
+    expect(textField.disabled).toBeFalsy();
   });
 
-  // test('should be disappear the textfield and guardar and cancelar buttons after click in cancelar button', () => {
-  //   fireEvent.click(cancelButton);
-  //   expect(buttonAddEntry).toBeInTheDocument();
-  // });
+  test('should be disappear the textfield and guardar and cancelar buttons after click in cancelar button', () => {
+    fireEvent.click(cancelButton);
+    expect(buttonAddEntry).toBeInTheDocument();
+  });
+
 });
